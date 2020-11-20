@@ -1,0 +1,32 @@
+
+server {
+	listen 3200;
+	listen [::]:3200;
+	server_name almarselwebsite;
+	return 301 https://$host$request_uri;
+}
+
+server{
+
+	listen 443 ssl ;
+	listen [::]:443 ssl ;
+	
+	server_name almarselwebsite;
+	
+	ssl_certificate /etc/nginx/ssl/almarselwebsite.pem;
+	ssl_certificate_key /etc/nginx/ssl/almarselwebsite.key;
+
+	root /var/www/almarselwebsite;
+	index index.html index.htm index.nginx-debian.html index.php;
+
+	location / {
+		autoindex on;
+		try_files $uri $uri/ =404;
+	}
+
+	location ~ \.php$ {
+		include snippets/fastcgi-php.conf;
+		fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
+	}
+}
+
