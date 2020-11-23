@@ -1,12 +1,10 @@
 service mysql start
 
-# Config Access
+# Config Access && Website Folder
 chown -R www-data /var/www/*
 chmod -R 755 /var/www/*
-
-# Generate website folder
-mkdir /var/www/almarselwebsite && touch /var/www/almarselwebsite/index.php
-echo "<?php phpinfo(); ?>" >> /var/www/almarselwebsite/index.php
+mkdir /var/www/almarselwebsite && mkdir /var/www/almarselwebsite/php && touch /var/www/almarselwebsite/php/index.php
+echo "<?php phpinfo(); ?>" >> /var/www/almarselwebsite/php/index.php
 
 # SSL
 mkdir /etc/nginx/ssl
@@ -27,7 +25,7 @@ echo "FLUSH PRIVILEGES;" | mysql -u root --skip-password
 mkdir /var/www/almarselwebsite/phpmyadmin
 wget https://files.phpmyadmin.net/phpMyAdmin/4.9.0.1/phpMyAdmin-4.9.0.1-all-languages.tar.gz
 tar -xvf phpMyAdmin-4.9.0.1-all-languages.tar.gz --strip-components 1 -C /var/www/almarselwebsite/phpmyadmin
-mv ./tmp/phpmyadmin.inc.php /var/www/almarselwebsite/phpmyadmin/config.inc.php
+mv ./tmp/config.inc.php /var/www/almarselwebsite/phpmyadmin/config.inc.php
 
 # DL wordpress
 cd /tmp/

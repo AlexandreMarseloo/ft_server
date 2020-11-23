@@ -7,7 +7,7 @@ RUN apt-get -y install mariadb-server
 
 COPY ./srcs/init.sh ./
 COPY ./srcs/nginx-conf ./tmp/nginx-conf
-COPY ./srcs/phpmyadmin.inc.php ./tmp/phpmyadmin.inc.php
+COPY ./srcs/config.inc.php ./tmp/config.inc.php
 COPY ./srcs/wp-config.php ./tmp/wp-config.php
 
 CMD bash init.sh
